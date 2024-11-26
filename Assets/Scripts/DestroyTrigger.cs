@@ -18,6 +18,22 @@ public class DestroyTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Destroy(other.gameObject);
+        if (other.name == "EndTrigger")
+        {
+            GameObject mainParent = other.gameObject;
+
+            while (mainParent.transform.parent != null)
+            {
+                if (mainParent.transform.parent.tag == "Road")
+                {
+                    Destroy(mainParent.transform.parent.gameObject);
+                    break;
+                }
+                else
+                {
+                    mainParent = mainParent.transform.parent.gameObject;
+                }
+            }
+        }
     }
 }
